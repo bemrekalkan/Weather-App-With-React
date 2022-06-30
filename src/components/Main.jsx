@@ -23,7 +23,7 @@ const Main = () => {
       //   console.log(response);
       const { main, name, sys, weather, id } = response.data;
       const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-      setData([...data, { main, name, sys, weather, iconUrl, id }]);
+      setData([{ main, name, sys, weather, iconUrl, id }, ...data]);
     } catch (err) {
       console.log(err);
     }
@@ -44,7 +44,7 @@ const Main = () => {
       </form>
       <div className="container">
         <ul className="cities">
-          {data.map((item) => (
+          {data?.map((item) => (
             <WeatherCard key={item.id} data={item} />
           ))}
         </ul>
