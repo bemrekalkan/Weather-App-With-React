@@ -1,8 +1,16 @@
 import React from "react";
 
 const Main = () => {
+  const [searchText, setSearchText] = useState("");
   const handleChange = (e) => {
-    console.log(e.target.value);
+    setSearchText(e.target.value);
+  };
+
+  const getWeatherDataFromApi = async () => {
+    let apiKey = process.env.REACT_APP_API_KEY;
+    let units = "metric";
+    let lang = "tr";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${apiKey}&units=${units}&lang=${lang}`;
   };
 
   return (
