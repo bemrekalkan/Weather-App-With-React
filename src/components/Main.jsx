@@ -3,13 +3,14 @@ import React, { useState } from "react";
 
 const Main = () => {
   const [searchText, setSearchText] = useState("");
+  const [data, setData] = useState([]);
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     getWeatherDataFromApi();
-    e.form.reset();
+    setSearchText("");
   };
   const getWeatherDataFromApi = async () => {
     let apiKey = process.env.REACT_APP_API_KEY;
@@ -19,10 +20,12 @@ const Main = () => {
     try {
       const response = await axios.get(url);
       console.log(response);
-      const { main, name, sys, weather } = response.data;
-      // const iconUrl = `https://openweathermap.org/img/wn/${
-      //         weather[0].icon}@2x.png`;
-    } catch {}
+      const { main, name, sys, weather, id } = response.data;
+      const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+      setData([{ main, name, sys, weather, iconUrl, id }]);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <section className="main">
@@ -31,6 +34,7 @@ const Main = () => {
           onChange={handleChange}
           type="text"
           placeholder="Search for a city"
+          value={searchText}
           autoFocus
         />
         <button type="submit">SUBMIT</button>
