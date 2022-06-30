@@ -19,14 +19,15 @@ const Main = () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${apiKey}&units=${units}&lang=${lang}`;
     try {
       const response = await axios.get(url);
-      console.log(response);
+      //   console.log(response);
       const { main, name, sys, weather, id } = response.data;
       const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-      setData([{ main, name, sys, weather, iconUrl, id }]);
+      setData({ main, name, sys, weather, iconUrl, id });
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(data);
   return (
     <section className="main">
       <form onSubmit={handleSubmit}>
@@ -41,7 +42,7 @@ const Main = () => {
         <span className="msg"></span>
       </form>
       <div className="container">
-        <ul className="cities">Main</ul>
+        <ul className="cities"></ul>
       </div>
     </section>
   );
