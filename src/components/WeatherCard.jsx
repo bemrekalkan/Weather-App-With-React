@@ -1,6 +1,7 @@
 import React from "react";
 
-const WeatherCard = () => {
+const WeatherCard = ({ data }) => {
+  const { main, name, sys, weather, iconUrl } = data;
   return (
     <li className="city">
       <h2 className="city-name">

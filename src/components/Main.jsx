@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import WeatherCard from "./WeatherCard";
 
 const Main = () => {
   const [searchText, setSearchText] = useState("");
@@ -22,7 +23,7 @@ const Main = () => {
       //   console.log(response);
       const { main, name, sys, weather, id } = response.data;
       const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-      setData({ main, name, sys, weather, iconUrl, id });
+      setData([...data, { main, name, sys, weather, iconUrl, id }]);
     } catch (err) {
       console.log(err);
     }
@@ -42,7 +43,11 @@ const Main = () => {
         <span className="msg"></span>
       </form>
       <div className="container">
-        <ul className="cities"></ul>
+        <ul className="cities">
+          {data.map((item) => (
+            <WeatherCard key={item.id} data={item} />
+          ))}
+        </ul>
       </div>
     </section>
   );
