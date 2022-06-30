@@ -9,6 +9,7 @@ const Main = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     getWeatherDataFromApi();
+    e.form.reset();
   };
   const getWeatherDataFromApi = async () => {
     let apiKey = process.env.REACT_APP_API_KEY;
